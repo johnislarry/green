@@ -1,9 +1,9 @@
 var registerStdin = require('./registerListener').registerStdin;
 var toChar = require('./utils').toChar;
 var toOrd = require('./utils').toOrd;
-var playSineWave = require('./playsinewave');
-var play = playSineWave.play;
-var stop = playSineWave.stop;
+var wavePlayer = require('./wavePlayer');
+var play = wavePlayer.play;
+var stop = wavePlayer.stop;
 var MAPPED_KEYS = {
 	'q': 'c',
 	'2': 'c#',
