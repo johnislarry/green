@@ -1,7 +1,9 @@
 var registerStdin = require('./registerListener').registerStdin;
 var toChar = require('./utils').toChar;
 var toOrd = require('./utils').toOrd;
-var playSineWave = require('./playsinewave').play;
+var playSineWave = require('./playsinewave');
+var play = playSineWave.play;
+var stop = playSineWave.stop;
 var MAPPED_KEYS = {
 	'q': 'c',
 	'2': 'c#',
@@ -30,7 +32,7 @@ function main() {
 	    process.exit();
 	  }
 	  if (MAPPED_KEYS.hasOwnProperty(toChar(ord))) {
-	    playSineWave(MAPPED_KEYS[toChar(ord)]);
+	    play(MAPPED_KEYS[toChar(ord)]);
 	  }
 	  console.log(MAPPED_KEYS[toChar(ord)]);
 	});

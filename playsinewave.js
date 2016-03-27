@@ -4,7 +4,7 @@ module.exports.play = function(note, octave)
     const factor = Math.pow(2, (1/12));
     var sampleRate = 44100;
 
-    var notes = {
+    var NOTES = {
         'a' : 0,
         'a#': 1,
         'b' : 2,
@@ -19,29 +19,33 @@ module.exports.play = function(note, octave)
         'g#': 11
     };
   
-    var tableSize = 44100/(440*Math.pow(factor,notes[note]));
+    var tableSize = 44100/(440*Math.pow(factor,NOTES[note]));
 
     var buffer = new Buffer(tableSize);
     for (var i = 0; i < tableSize; i+= 1) {
         buffer[i] = (Math.sin((i / tableSize) * 3.1415927 * 2.0) * 127);
     }
 
+    var audioObj;
+
     portAudio.open({
         channelCount: 1,
         sampleFormat: portAudio.SampleFormat8Bit,
         sampleRate: sampleRate
     }, function (err, pa) {
+        audioObj = pa;
         // send samples to be played
         for (var i = 0; i < 5 * sampleRate / tableSize; i++) {
-        pa.write(buffer);
-    }
+            pa.write(buffer);
+        }
 
     // start playing
     pa.start();
-
-    // stop playing 1 second later
-    setTimeout(function () {
-      pa.stop();
-    }, 1 * 1000);
   });
+  return audioObj;
+};
+
+module.exports.stop = function(audioObj)
+{
+  audioObj.stop();  
 };
