@@ -10,7 +10,7 @@
     "green"
   ],
   "author": "Green Richards",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "portaudio": "0.0.3"
   }
