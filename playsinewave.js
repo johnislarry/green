@@ -3,6 +3,8 @@ module.exports.play = function(note, octave)
 {
     const factor = Math.pow(2, (1/12));
     var sampleRate = 44100;
+    var baseFreq = 440;
+    var baseOctave = 4;
 
     var NOTES = {
         'a' : 0,
@@ -18,8 +20,10 @@ module.exports.play = function(note, octave)
         'g' : 10,
         'g#': 11
     };
+    
+    var semitonesFromBase = (octave - baseOctave) * 12 + NOTES[note];
   
-    var tableSize = 44100/(440*Math.pow(factor,NOTES[note]));
+    var tableSize = sampleRate/(baseFreq*Math.pow(factor,semitonesFromBase));
 
     var buffer = new Buffer(tableSize);
     for (var i = 0; i < tableSize; i+= 1) {
