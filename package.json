@@ -12,6 +12,7 @@
   "author": "Green Richards",
   "license": "ISC",
   "dependencies": {
-    "portaudio": "0.0.3"
+    "portaudio": "0.0.3",
+    "rx": "^4.1.0"
   }
 }
